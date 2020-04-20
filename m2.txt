@@ -1,0 +1,53 @@
+% Q
+q1,q2,q3,q4,q5,q6,q7,q8,qa,qr
+% sigma
+0,1,#
+% gamma
+0,1,#,x,_
+% delta
+q2,x,d
+q3,x,d
+q8,#,d
+qr,x,d
+qr,_,d
+q2,0,d
+q2,1,d
+q4,#,d
+qr,x,d
+qr,_,d
+q3,0,d
+q3,1,d
+q5,#,d
+qr,x,d
+qr,_,d
+q6,x,e
+qr,1,d
+qr,#,d
+q4,x,d
+qr,_,d
+qr,0,d
+q6,x,e
+qr,#,d
+q5,x,d
+qr,_,d
+q6,0,e
+q6,1,e
+q7,#,e
+q6,x,e
+qr,_,d
+q7,0,e
+q7,1,e
+qr,#,d
+q1,x,d
+qr,_,d
+qr,0,d
+qr,1,d
+qr,#,d
+q8,x,d
+qa,_,d
+% q0
+q1
+% qA
+qa
+% qR
+qr

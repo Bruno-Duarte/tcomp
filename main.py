@@ -1,70 +1,67 @@
-import re
-
-def descricao_mt():
-	print('Descrição da MT')
-	print('Obs: Não use parênteses ou chaves nas entradas')
-	Q = input('Estados [exem.: q0, q1, q2, ..., qn]: ')
-	sigma = input('Alfabeto de entrada [exem.: 0, 1, ..., n]: ')
-	gamma = input('Alfabeto da fita [exem.: a, b]: ')
-	delta = descricao_transicoes(Q, gamma)
-	return Q, sigma, gamma, delta
+from mt import MaquinaDeTuring
+from utils import cadeia_valida, descricao_mt, carrega_mt
+from menus import *
 	
-def string_em_lista(string):
-	lista = re.split(', | |,', string)
-	return lista
-	
-def descricao_transicoes(Q, gamma):
-	Q = string_em_lista(Q)
-	gamma = string_em_lista(gamma)
-	delta = {}
-	transicoes_estado = {}
-	for q in Q:
-		for simbolo in gamma:
-			transicao = input(f'Transição estado {q}, simbolo {simbolo} [exem.: (q1, x, D)]: ')
-			transicao = string_em_lista(transicao)
-			tupla = tuple(transicao)
-			transicoes_estado[simbolo] = tupla
-		delta[q] = transicoes_estado
-		transicoes_estado = {}
-	return delta
-				
-	
-def cadeia_valida(sigma, cadeia_entrada):
-	for c in cadeia_entrada:
-		if c not in sigma:
-			print('A cadeia possui símbolos que não estão no alfabeto')
-			return False
-		else:
-			return True	
-
-def processa_cadeia(w, delta, q0):
-	q = q0
-	w = w + '__'
-	cabecote = 1
-	configuracao = list(w)
-	configuracao = [q] + configuracao
-	while True:
-		if 'd' in delta[q][configuracao[cabecote]]:
-			configuracao[cabecote-1] = delta[q][configuracao[cabecote]][1]
-			configuracao[cabecote] = delta[q][configuracao[cabecote]][0]
-			q = configuracao[cabecote]						
-			cabecote += 1
-		elif 'e' in delta[q][configuracao[cabecote]]:
-			estado = delta[q][configuracao[cabecote]][0]
-			configuracao[cabecote] = delta[q][configuracao[cabecote]][1]
-			configuracao[cabecote-1] = configuracao[cabecote-2]
-			configuracao[cabecote-2] = estado
-			q = configuracao[cabecote-2]
-			cabecote -= 1	
-		print(configuracao)	
-		if q == 'qa' or q == 'qr':
-			break
-		
 				
 def main():
-	mt = descricao_mt()
-	w = input('Cadeia de entrada [exem.: 001011]: ')
-	processa_cadeia(w, mt[3], 'q0')
+	while True:
+		linha()
+		opc = menu_principal()
+		linha()
+		nova_cadeia = False
+		if opc == 1:
+			while True:
+				if not nova_cadeia:
+					try:
+						arquivo = input('Nome do arquivo: ')
+						tupla = tuple(carrega_mt(arquivo))
+					except FileNotFoundError:
+						linha()
+						print('Arquivo não encontrado!')
+						break
+				while True:
+					w = input('Cadeia de entrada [exem.: 0011]: ')
+					if cadeia_valida(tupla[1], w):
+						break
+			
+				linha()
+				mt = MaquinaDeTuring(tupla, w)
+				aceita = mt.processa_cadeia()
+				if aceita:
+					print(f'A máquina aceita {w}')
+				else:
+					print(f'A máquina rejeita {w}')
+				linha()
+				nova_cadeia = menu_secundario()
+				if not nova_cadeia:
+					break
+				linha()
+				
+		elif opc == 2:
+			while True:
+				if not nova_cadeia:
+					tupla = tuple(descricao_mt())
+				
+				while True:
+					w = input('Cadeia de entrada [exem.: 0011]: ')
+					if cadeia_valida(tupla[1], w):
+						break
+			
+				linha()
+				mt = MaquinaDeTuring(tupla, w)
+				mt.processa_cadeia()
+			
+				linha()
+				nova_cadeia = menu_secundario()
+				if not nova_cadeia:
+					break
+				linha()
+		elif opc == 3:
+			break
+		else:
+			print('Opção inválida!')
+			break
+		
 	
 if __name__ == '__main__':
 	main()

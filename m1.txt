@@ -1,0 +1,16 @@
+% Q
+q1,qA,qR
+% sigma
+0,1
+% gamma
+0,1,_
+% delta
+q1,_,d
+q1,_,d
+qA,_,d
+% q0
+q1
+% qA
+qA
+% qR
+qR
