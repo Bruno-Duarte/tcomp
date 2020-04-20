@@ -19,9 +19,33 @@ def main():
 						linha()
 						print('Arquivo não encontrado!')
 						break
+				
 				while True:
 					w = input('Cadeia de entrada [exem.: 0011]: ')
-					if cadeia_valida(tupla[1], w):
+					if cadeia_valida(tupla[2], w):
+						break
+			
+				linha()
+				mt = MaquinaDeTuring(tupla, w)
+				aceita = mt.processa_cadeia()
+				if aceita:
+					print(f'A máquina aceita {w}')
+				else:
+					print(f'A máquina rejeita {w}')
+				linha()
+				
+				nova_cadeia = menu_secundario()
+				if not nova_cadeia:
+					break
+				linha()	
+		elif opc == 2:
+			while True:
+				if not nova_cadeia:
+					tupla = tuple(descricao_mt())
+				
+				while True:
+					w = input('Cadeia de entrada [exem.: 0011]: ')
+					if cadeia_valida(tupla[2], w):
 						break
 			
 				linha()
@@ -36,31 +60,10 @@ def main():
 				if not nova_cadeia:
 					break
 				linha()
-				
-		elif opc == 2:
-			while True:
-				if not nova_cadeia:
-					tupla = tuple(descricao_mt())
-				
-				while True:
-					w = input('Cadeia de entrada [exem.: 0011]: ')
-					if cadeia_valida(tupla[1], w):
-						break
-			
-				linha()
-				mt = MaquinaDeTuring(tupla, w)
-				mt.processa_cadeia()
-			
-				linha()
-				nova_cadeia = menu_secundario()
-				if not nova_cadeia:
-					break
-				linha()
 		elif opc == 3:
 			break
 		else:
 			print('Opção inválida!')
-			break
 		
 	
 if __name__ == '__main__':

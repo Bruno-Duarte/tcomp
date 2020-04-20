@@ -1,5 +1,5 @@
 % Q
-q1,qA,qR
+q1,qa,qr
 % sigma
 0,1
 % gamma
@@ -7,10 +7,10 @@ q1,qA,qR
 % delta
 q1,_,d
 q1,_,d
-qA,_,d
+qa,_,d
 % q0
 q1
 % qA
-qA
+qa
 % qR
-qR
+qr

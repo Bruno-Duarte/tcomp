@@ -6,7 +6,7 @@ def descricao_mt():
 	print('Descrição da MT')
 	print('Obs: Não use parênteses ou chaves nas entradas')
 	while True:
-		Q = input('Estados [exem.: q0, q1, ..., qn, qA, qR]: ')
+		Q = input('Estados [exem.: q0, q1, ..., qn, qa, qr]: ')
 		if len(Q) > 2:
 			break
 		else:
@@ -20,8 +20,8 @@ def descricao_mt():
 	delta = funcao_de_transicao(Q, gamma)
 	while True:
 		q0 = input('Especifique o estado inicial [exem.: q0]: ')
-		qa = input('Especifique o estado de aceitação [exem.: qA]: ')
-		qr = input('Especifique o estado de rejeição [exem.: qR]: ')
+		qa = input('Especifique o estado de aceitação [exem.: qa]: ')
+		qr = input('Especifique o estado de rejeição [exem.: qr]: ')
 		if estado_valido(Q, q0, qa, qr):
 			break
 	return Q, sigma, gamma, delta, q0, qa, qr
@@ -102,8 +102,8 @@ def estado_valido(Q, q0, qa, qr):
 			linha()
 			print('Algum estado digitado não está contido em Q')
 			return False
-		else:
-			return True
+	return True
+	
 			
 def alfabeto_valido(sigma, gamma):
 	sigma = string_em_lista(sigma)
@@ -114,8 +114,7 @@ def alfabeto_valido(sigma, gamma):
 			linha()
 			print('O alfabeto de entrada deve estar contido no alfabeto da fita')
 			return False
-		else:
-			return True
+	return True
 
 		
 def transicao_valida(q, simbolo, mov, Q, gamma):
@@ -128,12 +127,11 @@ def transicao_valida(q, simbolo, mov, Q, gamma):
 	else:
 		return True
 
+
 def cadeia_valida(sigma, cadeia_entrada):
 	for c in cadeia_entrada:
-		if c not in sigma:
+		if c not in gamma:
 			linha()
 			print('A cadeia possui símbolos que não estão no alfabeto')
 			return False
-		else:
-			return True
-
+	return True

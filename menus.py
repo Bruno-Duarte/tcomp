@@ -1,5 +1,6 @@
 COMP_LINHA = 80
 
+
 def menu_principal():
 	print('1. Carregar entrada de um arquivo txt')
 	print('2. Digitar entrada')
