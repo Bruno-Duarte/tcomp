@@ -22,7 +22,7 @@ def main():
 				
 				while True:
 					w = input('Cadeia de entrada [exem.: 0011]: ')
-					if cadeia_valida(tupla[2], w):
+					if cadeia_valida(tupla[1], w):
 						break
 			
 				linha()
@@ -45,7 +45,7 @@ def main():
 				
 				while True:
 					w = input('Cadeia de entrada [exem.: 0011]: ')
-					if cadeia_valida(tupla[2], w):
+					if cadeia_valida(tupla[1], w):
 						break
 			
 				linha()
